@@ -1,5 +1,25 @@
 package com.workshop.swallowshop.cliente;
 
-public record DadosCliente(String nome, String emai, String telefone, String senha) {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
+public record DadosCliente(
+		
+		Long id, 
+		
+		@NotBlank
+		String nome, 
+		
+		@NotBlank
+		String email, 
+		
+		@NotBlank
+		@Pattern(regexp = "\\d{11}")
+		String telefone, 
+		
+		@NotBlank
+		String senha
+		
+		) {
 
 }
