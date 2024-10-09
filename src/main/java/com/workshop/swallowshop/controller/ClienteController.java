@@ -26,10 +26,10 @@ public class ClienteController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity cadastrar(@Valid @RequestBody DadosCliente dados, UriComponentsBuilder uriBuilder) {
-		var cliente = new Cliente();
+		var cliente = new Cliente(dados);
 		repository.save(cliente);
 		var uri = uriBuilder.path("/cliente/{id}").buildAndExpand(cliente.getId()).toUri();
-		return ResponseEntity.created(uri).body(new DadosInformacionalCliente(dados));
+		return ResponseEntity.created(uri).body(new DadosInformacionalCliente(cliente));
 			
 	}
 }
