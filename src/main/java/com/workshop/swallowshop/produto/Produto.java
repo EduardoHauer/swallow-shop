@@ -1,8 +1,14 @@
 package com.workshop.swallowshop.produto;
 
+import org.springframework.http.ResponseEntity;
+
+import com.workshop.swallowshop.cliente.Cliente;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,6 +22,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = "id")
 public class Produto {
 
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id; 
 	private String nome;
 	private Double preco;
