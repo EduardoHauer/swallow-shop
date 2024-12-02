@@ -26,6 +26,7 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "id")
 public class Cliente implements UserDetails{
 
+
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	 
@@ -46,6 +47,12 @@ public class Cliente implements UserDetails{
 			this.habilitar = dados.habilitar();
 	 }
 
+	public Cliente(String nome, String email, String senha) {
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+	} 
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return null;
@@ -80,6 +87,9 @@ public class Cliente implements UserDetails{
 	public String getPassword() {
 		return null;
 	}
+
+
+
 
 	
 }
