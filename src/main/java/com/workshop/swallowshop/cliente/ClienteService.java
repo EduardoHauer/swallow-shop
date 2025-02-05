@@ -14,22 +14,25 @@ public class ClienteService {
 	@Autowired
 	private PasswordEncoder pe;
 	
-	public Cliente registraCliente(Cliente cliente) {
+	public ClienteResponse registraCliente(Cliente cliente) {
 		if(clienteRepository.findByEmail(cliente.getEmail()) != null) {
 			throw new RuntimeException("Esse email já está em uso");
 		}else {
 			
 			String senhaCript = pe.encode(cliente.getSenha());
 			cliente.setSenha(senhaCript);
-		}
-
-		String randomString = RandomString.randomizadorDeString(49);
-		cliente.setVerificacao(randomString);
-		cliente.setHabilitar(false);
 		
-		return clienteRepository.save(cliente);
+			String randomString = RandomString.randomizadorDeString(49);
+			//cliente.setVerificacao(randomString);
+			cliente.setHabilitar(false);
+
+			Cliente clienteSalvo = clienteRepository.save(cliente);
+			
+			ClienteResponse clienteResponse = new ClienteResponse(
+					clienteSalvo.getId(), clienteSalvo.getNome(),
+					clienteSalvo.getEmail(), clienteSalvo.getPassword());
+			
+			return clienteResponse;
+	  }
 	}
-	
-	
-	
 }

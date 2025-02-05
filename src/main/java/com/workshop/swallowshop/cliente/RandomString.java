@@ -18,6 +18,8 @@ public class RandomString {
 			int index = secureRandom.nextInt(CARACTERES.length());
 			sb.append(CARACTERES.indexOf(index));
 		}
+
 		return sb.toString();
 	}
 }
+

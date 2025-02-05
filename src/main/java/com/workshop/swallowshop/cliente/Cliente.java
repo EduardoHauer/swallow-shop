@@ -10,14 +10,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Table(name = "cliente")
+@Table(name = "clientes")
 @Entity(name = "Cliente")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,31 +25,31 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "id")
 public class Cliente implements UserDetails{
 
-
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	 
 	private String nome;
 	private String email;
-	private String telefone;
 	private String senha;
-	private String verificacao;
+	//private String telefone;
+	//private String verificacao;
 	private Boolean habilitar;
 	
 	public Cliente(DadosCliente dados) {
 			this.id = dados.id();
 			this.nome = dados.nome();
 			this.email = dados.email();
-			this.telefone = dados.telefone();
 			this.senha = dados.senha();
-			this.verificacao = dados.verificacao();
+			//this.telefone = dados.telefone();
+			//this.verificacao = dados.verificacao();
 			this.habilitar = dados.habilitar();
 	 }
 
-	public Cliente(String nome, String email, String senha) {
+	public Cliente(String nome, String email, String senha, Boolean habilitar) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
+		this.habilitar = habilitar;
 	} 
 	
 	@Override
@@ -87,9 +86,4 @@ public class Cliente implements UserDetails{
 	public String getPassword() {
 		return null;
 	}
-
-
-
-
-	
 }
