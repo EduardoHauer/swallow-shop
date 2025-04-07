@@ -31,8 +31,8 @@ public class Cliente implements UserDetails{
 	private String nome;
 	private String email;
 	private String senha;
-	//private String telefone;
-	//private String verificacao;
+	private String telefone;
+	private String verificacao;
 	private Boolean habilitar;
 	
 	public Cliente(DadosCliente dados) {
@@ -40,8 +40,8 @@ public class Cliente implements UserDetails{
 			this.nome = dados.nome();
 			this.email = dados.email();
 			this.senha = dados.senha();
-			//this.telefone = dados.telefone();
-			//this.verificacao = dados.verificacao();
+			this.telefone = dados.telefone();
+			this.verificacao = dados.verificacao();
 			this.habilitar = dados.habilitar();
 	 }
 

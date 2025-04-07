@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.workshop.swallowshop.cliente.Cliente;
 import com.workshop.swallowshop.cliente.ClienteRepository;
 import com.workshop.swallowshop.cliente.ClienteResponse;
-import com.workshop.swallowshop.cliente.ClienteService;
 //import com.workshop.swallowshop.cliente.DadosCliente;
 import com.workshop.swallowshop.cliente.DadosInformacionalCliente;
+import com.workshop.swallowshop.service.ClienteService;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

@@ -16,15 +16,15 @@ public record DadosCliente(
 		@Email
 		String email, 
 		
-//		@NotBlank
-//		@Pattern(regexp = "\\d{11}")
-//		String telefone, 
+		@NotBlank
+		@Pattern(regexp = "\\d{11}")
+		String telefone, 
 		
 		@NotBlank
 		String senha,
 		
-//		@NotBlank
-//		String verificacao,
+		@NotBlank
+		String verificacao,
 		
 		@NotNull
 		Boolean habilitar

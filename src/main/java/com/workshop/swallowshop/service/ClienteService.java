@@ -1,9 +1,14 @@
-package com.workshop.swallowshop.cliente;
+package com.workshop.swallowshop.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.workshop.swallowshop.cliente.Cliente;
+import com.workshop.swallowshop.cliente.ClienteRepository;
+import com.workshop.swallowshop.cliente.ClienteResponse;
+import com.workshop.swallowshop.cliente.RandomString;
 
 @Service
 public class ClienteService {
