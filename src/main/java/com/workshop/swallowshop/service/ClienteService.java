@@ -2,6 +2,7 @@ package com.workshop.swallowshop.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,10 @@ public class ClienteService {
 	@Autowired
 	private PasswordEncoder pe;
 	
-	public ClienteResponse registraCliente(Cliente cliente) {
+	@Autowired
+	private EmailService mailService;
+	
+	public ClienteResponse registraCliente(Cliente cliente) throws Exception {
 		if(clienteRepository.findByEmail(cliente.getEmail()) != null) {
 			throw new RuntimeException("Esse email já está em uso");
 		}else {
@@ -28,7 +32,7 @@ public class ClienteService {
 			cliente.setSenha(senhaCript);
 		
 			String randomString = RandomString.randomizadorDeString(49);
-			//cliente.setVerificacao(randomString);
+			cliente.setVerificacao(randomString);
 			cliente.setHabilitar(false);
 
 			Cliente clienteSalvo = clienteRepository.save(cliente);
@@ -37,7 +41,22 @@ public class ClienteService {
 					clienteSalvo.getId(), clienteSalvo.getNome(),
 					clienteSalvo.getEmail(), clienteSalvo.getPassword());
 			
+			mailService.verificadorDeEmail(cliente);
 			return clienteResponse;
 	  }
+	}
+	
+	public boolean codigoVerificacao(String verificacao) {
+		
+		Cliente cliente = clienteRepository.findByCodigoDeVerificacao(verificacao);
+		
+		if(cliente == null || cliente.isEnabled()) {
+			return false;
+		}else {
+			cliente.setVerificacao(null);
+			cliente.setHabilitar(null);
+			clienteRepository.save(cliente);
+			return true;
+		}
 	}
 }
