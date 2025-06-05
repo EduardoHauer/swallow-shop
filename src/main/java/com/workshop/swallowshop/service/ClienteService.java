@@ -48,7 +48,7 @@ public class ClienteService {
 	
 	public boolean codigoVerificacao(String verificacao) {
 		
-		Cliente cliente = clienteRepository.findByCodigoDeVerificacao(verificacao);
+		Cliente cliente = clienteRepository.findByVerificacao(verificacao);
 		
 		if(cliente == null || cliente.isEnabled()) {
 			return false;
