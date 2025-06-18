@@ -28,7 +28,7 @@ public class ClienteController {
 	@Autowired
 	private ClienteService clienteService;
 	
-	@PostMapping
+	@PostMapping("/cadastro")
 	@Transactional
 	public ResponseEntity<ClienteResponse> cadastrar(@RequestBody @Valid DadosInformacionalCliente dados) throws Exception {
 		Cliente cliente = dados.toModel();
@@ -40,7 +40,7 @@ public class ClienteController {
 	public String verificaUsuario(@Param("code") String code) {
 		
 		if(clienteService.codigoVerificacao(code)) {
-			return "vrificacao_realizada";
+			return "verificacao_realizada";
 		} else {
 			
 			return "verificacao_falhou";
