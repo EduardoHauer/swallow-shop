@@ -16,7 +16,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.workshop.swallowshop.security.SecurityFilter;
 
 @Configuration
-@EnableWebSecurity
 public class SecurityConfiguration {
 	
 	@Autowired
