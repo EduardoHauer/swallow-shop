@@ -3,30 +3,30 @@ package com.workshop.swallowshop.security;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.auth0.jwt.interfaces.JWTVerifier;
 import com.workshop.swallowshop.cliente.Cliente;
 
-import lombok.Getter;
-
-@Getter
 @Service
 public class ServiceToken {
 
 	
 	@Value
-	  ("${api.security.token.secret}")
+	  ("${swallowshop.security.token.secret}")
 	private String secret;
 	
 	public String geraToken(Cliente cliente){
 		
 		var algorithm = Algorithm.HMAC256(secret);
 		
-		return com.auth0.jwt.JWT.create()
+		return   JWT.create()
 				.withIssuer("SwallowShop")
 				.withSubject(cliente.getEmail())
 				.withExpiresAt(dadosTempo())
@@ -39,7 +39,16 @@ public class ServiceToken {
 	}
 
 	public String getSubject(String tokenJWT) {
-		// TODO Auto-generated method stub
+		
+		try {
+			Algorithm algorithm = Algorithm.HMAC256(secret);
+			JWTVerifier verifier = JWT.require(algorithm)
+					.withIssuer("SwallowShop")
+					.build();
+			DecodedJWT jwt = verifier.verify(tokenJWT);
+			return jwt.getSubject();
+		} catch (JWTVerificationException  e) {
+	 }
 		return null;
 	}
 }
